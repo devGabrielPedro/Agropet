@@ -19,9 +19,8 @@ public class PerfilDAO extends DataBaseDAO {
         while(rs.next()) {
             Perfil p = new Perfil();
             p.setIdPerfil(rs.getInt("idPerfil")); // parâmetro com o mesmo nome da coluna do banco de dados
-            p.setLogin(rs.getString("login"));
-            p.setSenha(rs.getString("senha"));
-            p.setFuncionario(rs.getFuncionario("funcionario"));
+            p.setLogin_per(rs.getString("login_per"));
+            p.setSenha_per(rs.getString("senha_per"));
             lista.add(p);
         }
         this.desconectar();
@@ -32,18 +31,17 @@ public class PerfilDAO extends DataBaseDAO {
         try{
             String sql;
             this.conectar();
-            if(f.getIdFuncionario()==0) {
-                sql = "INSERT INTO perfil(login,senha,funcionario) VALUES(?,?,?)";
+            if(p.getIdPerfil()==0) {
+                sql = "INSERT INTO perfil(login_per,senha_per) VALUES(?,?)";
             } else {
-                sql = "UPDATE perfil SET login = ?, senha = ?, funcionario = ? WHERE idPerfil = ?";
+                sql = "UPDATE perfil SET login_per = ?, senha_per = ? WHERE idPerfil = ?";
             }
             
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, p.getLogin());
-            pstm.setString(2, p.getSenha());
-            pstm.setFuncionario(3, p.getFuncionario());
+            pstm.setString(1, p.getLogin_per());
+            pstm.setString(2, p.getSenha_per());
             if(p.getIdPerfil() > 0) {
-                pstm.setInt(2, p.getIdPerfil());
+                pstm.setInt(3, p.getIdPerfil());
             }
             pstm.execute();
             this.desconectar();
@@ -78,11 +76,10 @@ public class PerfilDAO extends DataBaseDAO {
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, idPerfil);
         ResultSet rs = pstm.executeQuery();
-        if(rs.next()) {
+        if (rs.next()) {
             p.setIdPerfil(rs.getInt("idPerfil"));
-            p.setLogin(rs.getString("login"));
-            p.setSenha(rs.getString("senha"));
-            p.setFuncionario(rs.getFuncionario("funcionario"));
+            p.setLogin_per(rs.getString("login_per"));
+            p.setSenha_per(rs.getString("senha_per"));
         }
         this.desconectar();
         return p;
