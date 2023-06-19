@@ -19,6 +19,7 @@ public class PerfilDAO extends DataBaseDAO {
         while(rs.next()) {
             Perfil p = new Perfil();
             p.setIdPerfil(rs.getInt("idPerfil")); // parâmetro com o mesmo nome da coluna do banco de dados
+            p.setNome(rs.getString("nome"));
             p.setLogin_per(rs.getString("login_per"));
             p.setSenha_per(rs.getString("senha_per"));
             lista.add(p);
@@ -32,16 +33,17 @@ public class PerfilDAO extends DataBaseDAO {
             String sql;
             this.conectar();
             if(p.getIdPerfil()==0) {
-                sql = "INSERT INTO perfil(login_per,senha_per) VALUES(?,?)";
+                sql = "INSERT INTO perfil(nome,login_per,senha_per) VALUES(?,?,?)";
             } else {
-                sql = "UPDATE perfil SET login_per = ?, senha_per = ? WHERE idPerfil = ?";
+                sql = "UPDATE perfil SET nome = ?, login_per = ?, senha_per = ? WHERE idPerfil = ?";
             }
             
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, p.getLogin_per());
-            pstm.setString(2, p.getSenha_per());
+            pstm.setString(1, p.getNome());
+            pstm.setString(2, p.getLogin_per());
+            pstm.setString(3, p.getSenha_per());
             if(p.getIdPerfil() > 0) {
-                pstm.setInt(3, p.getIdPerfil());
+                pstm.setInt(4, p.getIdPerfil());
             }
             pstm.execute();
             this.desconectar();
@@ -78,6 +80,7 @@ public class PerfilDAO extends DataBaseDAO {
         ResultSet rs = pstm.executeQuery();
         if (rs.next()) {
             p.setIdPerfil(rs.getInt("idPerfil"));
+            p.setNome(rs.getString("nome"));
             p.setLogin_per(rs.getString("login_per"));
             p.setSenha_per(rs.getString("senha_per"));
         }

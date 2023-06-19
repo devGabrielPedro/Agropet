@@ -3,18 +3,18 @@ package model;
 public class Perfil {
 
     private int idPerfil;
-    private String login;
-    private String senha;
-    private Funcionario funcionario;
+    private String nome;
+    private String login_per;
+    private String senha_per;
 
     public Perfil() {
     }
 
-    public Perfil(int idPerfil, String login, String senha, Funcionario funcionario) {
+    public Perfil(int idPerfil, String nome, String login_per, String senha_per) {
         this.idPerfil = idPerfil;
-        this.login = login;
-        this.senha = senha;
-        this.funcionario = funcionario;
+        this.nome = nome;
+        this.login_per = login_per;
+        this.senha_per = senha_per;
     }
 
     public int getIdPerfil() {
@@ -25,34 +25,33 @@ public class Perfil {
         this.idPerfil = idPerfil;
     }
 
-    public String getLogin() {
-        return login;
+    public String getNome() {
+        return nome;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getLogin_per() {
+        return login_per;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setLogin_per(String login_per) {
+        this.login_per = login_per;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public String getSenha_per() {
+        return senha_per;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setSenha_per(String senha_per) {
+        this.senha_per = senha_per;
     }
 
     @Override
     public String toString() {
-        return "Perfil{" + "idPerfil=" + idPerfil + ", login=" + login 
-                + ", senha=" + senha + ", funcionario=" + funcionario + '}';
+        return "Perfil{" + "idPerfil=" + idPerfil + ", nome=" + nome + ", login_per=" + login_per + ", senha_per=" + senha_per + '}';
     }
     
 }
