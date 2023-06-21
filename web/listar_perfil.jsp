@@ -31,6 +31,7 @@
             <table>
                 <th>ID</th>
                 <th>Nome</th>
+                <th>Opções</th>
                 
                 <jsp:useBean class="model.dao.PerfilDAO" id="pDAO"/>
                 

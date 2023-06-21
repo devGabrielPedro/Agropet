@@ -8,6 +8,14 @@
         <servlet-name>GerenciarPerfil</servlet-name>
         <servlet-class>controller.GerenciarPerfil</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GerenciarCliente</servlet-name>
+        <servlet-class>controller.GerenciarCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GerenciarAnimal</servlet-name>
+        <servlet-class>controller.GerenciarAnimal</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GerenciarFuncionario</servlet-name>
         <url-pattern>/gerenciar_funcionario.do</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>GerenciarPerfil</servlet-name>
         <url-pattern>/gerenciar_perfil.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarCliente</servlet-name>
+        <url-pattern>/gerenciar_cliente.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarAnimal</servlet-name>
+        <url-pattern>/gerenciar_animal.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

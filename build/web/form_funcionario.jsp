@@ -20,27 +20,29 @@
             <h1>Cadastrar Funcionário</h1>
             
             <form action="gerenciar_funcionario.do" method="POST">
-                <input type="hidden" name="idFuncionario" value=""/>
+                <input type="hidden" name="idFuncionario" value="${funcionario.idFuncionario}"/>
                 <div>
                     <h2>Dados do Funcionário</h2>
                     <label for="nome_fun">Nome:</label>
-                    <input type="text" id="nome_fun" name="nome_fun" required="" value="" maxlength="50"/><br>
+                    <input type="text" id="nome_fun" name="nome_fun" required="" value="${funcionario.nome_fun}" maxlength="50"/><br>
                     <label for="cpf_fun">CPF:</label>
-                    <input type="text" id="cpf_fun" name="cpf_fun" required="" value="" maxlength="11"/><br>
+                    <input type="text" id="cpf_fun" name="cpf_fun" required="" value="${funcionario.cpf_fun}" maxlength="11"/><br>
                     <label for="endereco_fun">Endereço:</label>
-                    <input type="text" id="endereco_fun" name="endereco_fun" required="" value="" maxlength="45"/><br>
+                    <input type="text" id="endereco_fun" name="endereco_fun" required="" value="${funcionario.endereco_fun}" maxlength="45"/><br>
                     <label for="telefone_fun">Telefone:</label>
-                    <input type="text" id="telefone_fun" name="telefone_fun" required="" value="" maxlength="45"/><br>
+                    <input type="text" id="telefone_fun" name="telefone_fun" required="" value="${funcionario.telefone_fun}" maxlength="45"/><br>
                     <label for="funcao_fun">Função:</label>
-                    <input type="text" id="funcao_fun" name="funcao_fun" required="" value="" maxlength="45"/><br>
+                    <input type="text" id="funcao_fun" name="funcao_fun" required="" value="${funcionario.funcao_fun}" maxlength="45"/><br>
                     <label for="email_fun">Email:</label>
-                    <input type="text" id="email_fun" name="email_fun" value="" maxlength="60"/><br>
+                    <input type="text" id="email_fun" name="email_fun" value="${funcionario.email_fun}" maxlength="60"/><br>
                     <label for="idPerfil">Perfil:</label>
                     <select name="idPerfil" required="">
                         <option value="">Selecione o Perfil</option>
                         <jsp:useBean class="model.dao.PerfilDAO" id="idPerfil"/>
                         <c:forEach var="p" items="${idPerfil.lista}">
-                            <option value="${p.idPerfil}">${p.nome}</option>
+                            <option value="${p.idPerfil}"
+                                <c:if test="${p.idPerfil==funcionario.idPerfil.idPerfil}">selected=""</c:if>
+                            >   ${p.nome}</option>
                         </c:forEach>
                     </select>
                 </div>

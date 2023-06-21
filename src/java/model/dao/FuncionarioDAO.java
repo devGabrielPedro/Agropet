@@ -86,21 +86,24 @@ public class FuncionarioDAO extends DataBaseDAO {
     public Funcionario getCarregaPorID(int idFuncionario) throws Exception {
         
         Funcionario f = new Funcionario();
-        String sql = "SELECT * FROM funcionario WHERE idFuncionario=?";
+        String sql = "SELECT f.*, p.nome FROM funcionario f "
+                + "INNER JOIN perfil p ON p.idPerfil = f.idPerfil "
+                + "WHERE f.idFuncionario=? ";
         this.conectar();
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, idFuncionario);
         ResultSet rs = pstm.executeQuery();
         if(rs.next()) {      
-            f.setIdFuncionario(rs.getInt("idFuncionario"));
-            f.setNome_fun(rs.getString("nome_fun"));
-            f.setCpf_fun(rs.getString("cpf_fun"));
-            f.setEndereco_fun(rs.getString("endereco_fun"));
-            f.setTelefone_fun(rs.getString("telefone_fun"));
-            f.setFuncao_fun(rs.getString("funcao_fun"));
-            f.setEmail_fun(rs.getString("email_fun"));
-            PerfilDAO pDAO = new PerfilDAO();
-            Perfil p = pDAO.getCarregaPorID(rs.getInt("idPerfil"));
+            f.setIdFuncionario(rs.getInt("f.idFuncionario"));
+            f.setNome_fun(rs.getString("f.nome_fun"));
+            f.setCpf_fun(rs.getString("f.cpf_fun"));
+            f.setEndereco_fun(rs.getString("f.endereco_fun"));
+            f.setTelefone_fun(rs.getString("f.telefone_fun"));
+            f.setFuncao_fun(rs.getString("f.funcao_fun"));
+            f.setEmail_fun(rs.getString("f.email_fun"));
+            Perfil p = new Perfil();
+            p.setIdPerfil(rs.getInt("f.idPerfil"));
+            p.setNome(rs.getString("p.nome"));
             f.setIdPerfil(p);
         }
         this.desconectar();

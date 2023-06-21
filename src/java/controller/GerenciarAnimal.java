@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
 import java.io.IOException;
@@ -7,23 +12,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Funcionario;
-import model.Perfil;
-import model.dao.FuncionarioDAO;
+import model.Animal;
+import model.Cliente;
+import model.dao.AnimalDAO;
 
-public class GerenciarFuncionario extends HttpServlet {
+/**
+ *
+ * @author ybiel
+ */
+public class GerenciarAnimal extends HttpServlet {
 
-    
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,25 +30,25 @@ public class GerenciarFuncionario extends HttpServlet {
         String mensagem = "";
         
         String acao = request.getParameter("acao");
-        String idFuncionario = request.getParameter("idFuncionario");
+        String idAnimal = request.getParameter("idAnimal");
         
-        Funcionario f = new Funcionario();
+        Animal a = new Animal();
         
         try {
-            FuncionarioDAO fDAO = new FuncionarioDAO();
+            AnimalDAO aDAO = new AnimalDAO();
             if(acao.equals("alterar")) {
-                f = fDAO.getCarregaPorID(Integer.parseInt(idFuncionario));
-                if(f.getIdFuncionario() > 0) {
-                    RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_funcionario.jsp");
-                    request.setAttribute("funcionario", f);
+                a = aDAO.getCarregaPorID(Integer.parseInt(idAnimal));
+                if(a.getIdAnimal() > 0) {
+                    RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_animal.jsp");
+                    request.setAttribute("animal", a);
                     disp.forward(request, response);
                 } else {
                     mensagem = "Funcionário não encontrado!";
                 }
             }
             if(acao.equals("deletar")) {
-                f.setIdFuncionario(Integer.parseInt(idFuncionario));
-                if(fDAO.exclui(f)) {
+                a.setIdAnimal(Integer.parseInt(idAnimal));
+                if(aDAO.exclui(a)) {
                     mensagem = "Excluído com sucesso!";
                 } else {
                     mensagem = "Erro ao excluir o funcionário!";
@@ -62,7 +60,7 @@ public class GerenciarFuncionario extends HttpServlet {
         }
         out.println("<script type='text/javascript'>");
         out.println("alert('"+mensagem+"');");
-        out.println("location.href='listar_funcionario.jsp'");
+        out.println("location.href='listar_animal.jsp'");
         out.println("</script>");
     }
 
@@ -79,37 +77,33 @@ public class GerenciarFuncionario extends HttpServlet {
             throws ServletException, IOException {
         
         PrintWriter out = response.getWriter();
-        String idFuncionario = request.getParameter("idFuncionario");
-        String nome_fun = request.getParameter("nome_fun");
-        String cpf_fun = request.getParameter("cpf_fun");
-        String endereco_fun = request.getParameter("endereco_fun");
-        String telefone_fun = request.getParameter("telefone_fun");
-        String funcao_fun = request.getParameter("funcao_fun");
-        String email_fun = request.getParameter("email_fun");
-        String idPerfil = request.getParameter("idPerfil");
+        String idAnimal = request.getParameter("idAnimal");
+        String nome_ani = request.getParameter("nome_ani");
+        String raca_ani = request.getParameter("raca_ani");
+        String idade_ani = request.getParameter("idade_ani");
+        String tamanho_ani = request.getParameter("tamanho_ani");
+        String idCliente = request.getParameter("idCliente");
         
         String mensagem="";
         
-        Funcionario f = new Funcionario();
-        if(!idFuncionario.isEmpty()) {
-            f.setIdFuncionario(Integer.parseInt(idFuncionario));
+        Animal a = new Animal();
+        if(!idAnimal.isEmpty()) {
+            a.setIdAnimal(Integer.parseInt(idAnimal));
         } 
-        if(nome_fun.equals("") || cpf_fun.equals("") || endereco_fun.equals("") || telefone_fun.equals("") || funcao_fun.equals("") || idPerfil.equals("")) {
+        if(nome_ani.equals("") || raca_ani.equals("") || idade_ani.equals("") || tamanho_ani.equals("") || idCliente.equals("")) {
             mensagem = "Campos obrigatórios deverão ser preenchidos";
         } else {
-            f.setNome_fun(nome_fun);
-            f.setCpf_fun(cpf_fun);
-            f.setEndereco_fun(endereco_fun);
-            f.setTelefone_fun(telefone_fun);
-            f.setFuncao_fun(funcao_fun);
-            f.setEmail_fun(email_fun);
-            Perfil p = new Perfil();
-            p.setIdPerfil(Integer.parseInt(idPerfil));
-            f.setIdPerfil(p);
+            a.setNome_ani(nome_ani);
+            a.setRaca_ani(raca_ani);
+            a.setIdade_ani(Integer.parseInt(idade_ani));
+            a.setTamanho_ani(tamanho_ani);
+            Cliente c = new Cliente();
+            c.setIdCliente(Integer.parseInt(idCliente));
+            a.setIdCliente(c);
             
             try {
-            FuncionarioDAO fDAO = new FuncionarioDAO();
-                if(fDAO.grava(f)) {
+            AnimalDAO aDAO = new AnimalDAO();
+                if(aDAO.grava(a)) {
                 mensagem = "Gravado com Sucesso!";
             } else {
                 mensagem = "Erro ao Gravar no Banco de Dados!";
@@ -122,7 +116,7 @@ public class GerenciarFuncionario extends HttpServlet {
         }
         out.println("<script type='text/javascript'>");
         out.println("alert('"+mensagem+"');");
-        out.println("location.href='listar_funcionario.jsp'");
+        out.println("location.href='listar_animal.jsp'");
         out.println("</script>");
     }
 

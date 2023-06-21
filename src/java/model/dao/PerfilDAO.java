@@ -87,5 +87,31 @@ public class PerfilDAO extends DataBaseDAO {
         this.desconectar();
         return p;
     }
+    public Perfil getRecuperarPerfil(String login_per) {
+        
+        Perfil p = new Perfil();
+        String sql = "SELECT p.* FROM perfil p "
+                + "WHERE p.login_per=?";
+        
+        try {
+            this.conectar();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, login_per);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()) {
+                p.setIdPerfil(rs.getInt("p.idPerfil"));
+                p.setNome(rs.getString("p.nome"));
+                p.setLogin_per(rs.getString("p.login_per"));
+                p.setSenha_per(rs.getString("p.senha_per"));
+            }
+            this.desconectar();
+            return p;
+            
+        } catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    
     
 }

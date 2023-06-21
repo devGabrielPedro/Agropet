@@ -54,7 +54,7 @@
                     <td>${f.email_fun}</td>
                     <td>${f.idPerfil.nome}</td>
                     <td>
-                        <a href="gerenciar_funcionario.do?acao=alterar&idPerfil=${f.idFuncionario}">
+                        <a href="gerenciar_funcionario.do?acao=alterar&idFuncionario=${f.idFuncionario}">
                             Alterar
                         </a>
                         <button onclick="confirmarExclusao(${f.idFuncionario},'${f.nome_fun}')">

@@ -3,6 +3,8 @@
         <li> <a href="#">Inicio</a></li>
         <li> <a href="listar_funcionario.jsp">Funcionários</a></li>
         <li> <a href="listar_perfil.jsp">Perfis</a></li>
+        <li> <a href="listar_cliente.jsp">Clientes</a></li>
+        <li> <a href="listar_animal.jsp">Pets</a></li>
     </ul>
 </div>
 

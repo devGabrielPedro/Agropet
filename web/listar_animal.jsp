@@ -14,8 +14,8 @@
         <title>Agropet</title>
         <script type="text/javascript">
             function confirmarExclusao(id,nome) {
-                if(confirm('Deseja realmente excluir o funcionário '+nome+'?')) {
-                    location.href='gerenciar_funcionario.do?acao=deletar&idFuncionario='+id;
+                if(confirm('Deseja realmente excluir o animal '+nome+'?')) {
+                    location.href='gerenciar_animal.do?acao=deletar&idAnimal='+id;
                 }
             }
         </script>
@@ -24,40 +24,36 @@
         <div class="container-fluid">
             <%@include file="banner.jsp" %>
             <%@include file="menu.jsp" %>
-            <h1>Lista de Funcionários</h1>
+            <h1>Lista de Animais</h1>
             
-            <a href="form_funcionario.jsp">Novo cadastro</a>
+            <a href="form_animal.jsp">Novo cadastro</a>
             
-            <table id="listarFuncionario">
+            <table id="listarAnimal">
             <thead>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>CPF</th>
-                <th>Endereço</th>
-                <th>Telefone</th>
-                <th>Função</th>
-                <th>Email</th>
-                <th>Perfil</th>
+                <th>Raça</th>
+                <th>Idade</th>
+                <th>Tamanho</th>
+                <th>Dono</th>
                 <th>Opções</th>
             </thead>    
-                <jsp:useBean class="model.dao.FuncionarioDAO" id="fDAO"/>
+                <jsp:useBean class="model.dao.AnimalDAO" id="aDAO"/>
                 
-                <c:forEach var="f" items="${fDAO.lista}">
+                <c:forEach var="a" items="${aDAO.lista}">
                 
                 <tr>
-                    <td>${f.idFuncionario}</td>
-                    <td>${f.nome_fun}</td>
-                    <td>${f.cpf_fun}</td>
-                    <td>${f.endereco_fun}</td>
-                    <td>${f.telefone_fun}</td>
-                    <td>${f.funcao_fun}</td>
-                    <td>${f.email_fun}</td>
-                    <td>${f.idPerfil.nome}</td>
+                    <td>${a.idAnimal}</td>
+                    <td>${a.nome_ani}</td>
+                    <td>${a.raca_ani}</td>
+                    <td>${a.idade_ani}</td>
+                    <td>${a.tamanho_ani}</td>
+                    <td>${a.idCliente.nome_cli}</td>
                     <td>
-                        <a href="gerenciar_funcionario.do?acao=alterar&idFuncionario=${f.idFuncionario}">
+                        <a href="gerenciar_animal.do?acao=alterar&idAnimal=${a.idAnimal}">
                             Alterar
                         </a>
-                        <button onclick="confirmarExclusao(${f.idFuncionario},'${f.nome_fun}')">
+                        <button onclick="confirmarExclusao(${a.idAnimal},'${a.nome_ani}')">
                             Excluir
                         </button>
                     </td>
